@@ -1,0 +1,171 @@
+/* GENERAL CONFIGS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+body, html {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+.title {
+    color: rgb(56, 111, 231);
+    margin-bottom: 15px;
+}
+
+.close-button {
+    color: rgb(209, 68, 68);
+
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid rgb(197, 197, 197);
+    border-radius: 20%;
+
+    box-shadow: 0 6px 6px rgba(0,0,0,0.05);
+
+    cursor: pointer;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button:hover {
+    background-color: rgb(209, 68, 68);
+    color: white;
+}
+
+/* MAIN MENU */
+#menu-wrapper {
+    padding: 32px;
+    flex: 1;
+    border-right: 1px solid rgb(226, 226, 226);
+}
+
+#projects {
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+
+    overflow-y: auto;
+}
+
+#projects-wrapper {
+    flex: 1;
+}
+
+.project-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.project-div {
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;
+    min-height: 35px;
+}
+
+.project-div .selected {
+    background-color: rgb(56, 111, 231);
+    color: white;
+}
+
+/* CREATE TODO MODAL */
+#create-todo-wrapper {
+    height: 50vh;
+    flex-direction: column;
+    justify-content: space-between;
+    display: none;
+
+    z-index: 9999;
+
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%, 50%);
+    border: 1px solid rgb(194, 194, 194);
+    background-color: white;
+    box-shadow: 0 6px 6px rgba(0,0,0,0.05);
+
+    padding: 25px;
+    border-radius: 15px;
+}
+
+#modal-background {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    display: none;
+}
+
+#close-modal {
+    position: absolute;   
+    right: 20px;
+    top: 20px;
+}
+
+/* TO-DO LIST */
+#todos-wrapper {
+    flex: 7;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+}
+
+.todo-div {
+    margin: 20px;
+    padding: 10px;
+
+    min-height: 50px;
+
+    background-color: rgb(253, 253, 253);
+    
+    box-shadow: 0 6px 6px rgba(0,0,0,0.05);
+
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo-div * {
+    margin: 0;
+}
+
+.todo-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-description-div {
+    flex: 3;
+}
+
+.todo-title-div {
+    flex: 1;
+}
+
+.todo-duedate-div {
+    flex: 1;
+}
