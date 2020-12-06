@@ -24,6 +24,7 @@ function renderProjects(projectObjectList) {
                 renderDefaultScreen();
             }
             projectObjectList.splice(index, 1);
+            sessionStorage.setItem("projectList", JSON.stringify(projectObjectList));
             renderProjects(projectObjectList);
         });
 

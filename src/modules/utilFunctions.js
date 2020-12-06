@@ -36,4 +36,14 @@ function setupModalCloseButtons() {
     })
 }
 
-export { returnTodoList, returnProjectList, returnActiveProject, toggleModal, setupModalCloseButtons };
+function setupTodoCheckbox(todoCheckbox, todo, projectList) {
+    todoCheckbox.addEventListener('change', e => {
+        todo.finished = !todo.finished;
+        e.target.parentNode.classList.toggle("finished-todo");
+        sessionStorage.setItem("projectList", JSON.stringify(projectList));
+    });
+
+    todoCheckbox.addEventListener('click', e => e.stopPropagation());
+}
+
+export { returnTodoList, returnProjectList, returnActiveProject, toggleModal, setupModalCloseButtons, setupTodoCheckbox };

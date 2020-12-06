@@ -1,5 +1,6 @@
-import { returnTodoList, returnActiveProject } from './utilFunctions';
+import { returnTodoList, returnActiveProject, setupTodoCheckbox } from './utilFunctions';
 import { changeTodoModal } from './changeTodo';
+import { deleteTodo, deleteFinishedTodos } from './deleteTodo';
 
 function renderTodos(projectList) {
     const todoList = returnTodoList(projectList);
@@ -13,18 +14,21 @@ function renderTodos(projectList) {
     const highPriorityTitle = document.createElement('h3');
     highPriorityDiv.classList.add('priority-div');
     highPriorityTitle.innerText = "High Priority";
+    highPriorityTitle.classList.add('priority-title');
     highPriorityDiv.appendChild(highPriorityTitle);
 
     const mediumPriorityDiv = document.createElement('div');
     const mediumPriorityTitle = document.createElement('h3');
     mediumPriorityDiv.classList.add('priority-div');
     mediumPriorityTitle.innerText = "Medium Priority";
+    mediumPriorityTitle.classList.add('priority-title');
     mediumPriorityDiv.appendChild(mediumPriorityTitle);
 
     const lowPriorityDiv = document.createElement('div');
     const lowPriorityTitle = document.createElement('h3');
     lowPriorityDiv.classList.add('priority-div');
     lowPriorityTitle.innerText = "Low Priority";
+    lowPriorityTitle.classList.add('priority-title');
     lowPriorityDiv.appendChild(lowPriorityTitle);
 
     const todosWrapper = document.querySelector("#todos-wrapper");
@@ -37,10 +41,16 @@ function renderTodos(projectList) {
     projectName.innerText = activeProject.name;
     projectName.classList.add('title');
 
+    const deleteFinished = document.createElement('button');
+    deleteFinished.type = "button";
+    deleteFinished.innerText = "Delete finished To-Do's";
+    deleteFinishedTodos(deleteFinished, todoList, projectList);
+
     const numberOfTodos = document.createElement('span');
     numberOfTodos.innerText = `${todoList.length} ToDo's in this project`;
 
     todosMenuDiv.appendChild(projectName);
+    todosMenuDiv.appendChild(deleteFinished);
     todosMenuDiv.appendChild(numberOfTodos);
     todosWrapper.appendChild(todosMenuDiv);
 
@@ -71,12 +81,14 @@ function renderTodos(projectList) {
         const todoCheckbox = document.createElement('input');
         todoCheckbox.type = "checkbox";
         todoCheckbox.classList.add('todo-checkbox');
-        todoCheckbox.addEventListener('change', e => {
-            e.stopPropagation();
-            todo.finished = !todo.finished;
-            e.target.parentNode.classList.toggle("finished-todo");
-            sessionStorage.setItem("projectList", JSON.stringify(projectList));
-        });
+        setupTodoCheckbox(todoCheckbox, todo, projectList);
+
+        const deleteTodoButton = document.createElement('span');
+        deleteTodoButton.innerText = "X";
+        deleteTodoButton.classList.add('close-button');
+        deleteTodoButton.classList.add('delete-todo-button');
+
+        deleteTodo(deleteTodoButton, todoList, projectList, index);
 
         if(todo.finished) {
             todoDiv.classList.add('finished-todo');
@@ -95,6 +107,7 @@ function renderTodos(projectList) {
         todoDiv.appendChild(todoTitleDiv);
         todoDiv.appendChild(todoDescriptionDiv);
         todoDiv.appendChild(todoDuedateDiv);
+        todoDiv.appendChild(deleteTodoButton);
 
         if(todo.priority === "High") {
             highPriorityDiv.appendChild(todoDiv);

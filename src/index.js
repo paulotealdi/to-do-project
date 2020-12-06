@@ -10,11 +10,6 @@ const projectList = JSON.parse(sessionStorage.getItem("projectList")) || [{
     name: 'default',
     active: false,
     todoList: []
-},
-{
-    name: 'main',
-    active: false,
-    todoList: []
 }];
 
 init();
