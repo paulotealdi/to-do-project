@@ -75,6 +75,7 @@ function renderTodos(projectList) {
             e.stopPropagation();
             todo.finished = !todo.finished;
             e.target.parentNode.classList.toggle("finished-todo");
+            sessionStorage.setItem("projectList", JSON.stringify(projectList));
         });
 
         if(todo.finished) {

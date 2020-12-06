@@ -4,15 +4,16 @@ import { createTodo, setupTodoModal } from './modules/createTodo';
 import { returnActiveProject, setupModalCloseButtons } from './modules/utilFunctions';
 import { createProject, setupProjectModal } from './modules/createProject';
 import { changeTodo } from './modules/changeTodo';
+import renderDefaultScreen from './modules/defaultScreen';
 
-const projectList = [{
+const projectList = JSON.parse(sessionStorage.getItem("projectList")) || [{
     name: 'default',
     active: false,
     todoList: []
 },
 {
     name: 'main',
-    active: true,
+    active: false,
     todoList: []
 }];
 
@@ -28,6 +29,8 @@ function newTodo() {
 
     const activeProject = returnActiveProject(projectList);
     activeProject.todoList.push(newTodoObject);
+
+    sessionStorage.setItem("projectList", JSON.stringify(projectList));
 }
 
 function newProject() {
@@ -36,6 +39,8 @@ function newProject() {
     const project = createProject(projectName);
 
     projectList.push(project);
+
+    sessionStorage.setItem("projectList", JSON.stringify(projectList));
 }
 
 function init() {
@@ -56,10 +61,16 @@ function init() {
         const activeProject = returnActiveProject(projectList);
         changeTodo(activeProject.todoList, id);
         renderTodos(projectList);
+        sessionStorage.setItem("projectList", JSON.stringify(projectList));
     });
     
     renderProjects(projectList);
-    renderTodos(projectList);
+
+    if(returnActiveProject(projectList) !== undefined)
+        renderTodos(projectList);
+    else
+        renderDefaultScreen();
+
     setupTodoModal();
     setupProjectModal();
     setupModalCloseButtons();

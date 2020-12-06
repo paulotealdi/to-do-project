@@ -17,6 +17,8 @@ function changeActiveProject(projectList) {
 
             const createTodoButton = document.querySelector('#create-todo');
             createTodoButton.disabled = false;
+
+            sessionStorage.setItem("projectList", JSON.stringify(projectList));
         });
     });
 }

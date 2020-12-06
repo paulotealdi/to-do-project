@@ -25,10 +25,10 @@ function changeTodo(todoList, id) {
     const priorityInput = document.querySelector("#todo-priority-edit");
     const duedateInput = document.querySelector("#todo-duedate-edit");
 
-    todoList[id].title = titleInput.value;
-    todoList[id].description = descriptionInput.value;
+    todoList[id].title = titleInput.value || "Empty 😔";
+    todoList[id].description = descriptionInput.value || "Empty 😔";
     todoList[id].priority = priorityInput.value;
-    todoList[id].duedate = duedateInput.value;
+    todoList[id].duedate = duedateInput.value || "Empty 😔";
 }
 
 export { changeTodoModal, changeTodo };
