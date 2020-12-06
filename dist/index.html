@@ -9,12 +9,12 @@
     <title>To-Do List</title>
 </head>
 <body>
-    <div id="modal-background"></div>
-    <div id="create-todo-wrapper">
-        <span id="close-modal" class="close-button">X</span>
+    <div id="modal-background" class="closed"></div>
+    <div id="create-todo-wrapper" class="todo-modal closed">
+        <span id="close-modal" class="close-button close-button-modal">X</span>
         <h3 class="title">Create To-Do</h3>
         <div class="todo-field">
-            <label for="todo-tile">To-Do title</label>
+            <label for="todo-title">To-Do title</label>
             <input type="text" id="todo-title">
         </div>
     
@@ -39,15 +39,57 @@
 
         <button type="button" id="submit-todo">Create ToDo</button>
     </div>
+        
+    <div id="change-todo-wrapper" class="todo-modal closed">
+        <span id="close-edit-modal" class="close-button close-button-modal">X</span>
+        <h3 class="title">Change To-Do</h3>
+        <div class="todo-field">
+            <label for="todo-title-edit">To-Do title</label>
+            <input type="text" id="todo-title-edit">
+        </div>
+    
+        <div class="todo-field">
+            <label for="todo-description-edit">To-Do description</label>
+            <input type="text" id="todo-description-edit">
+        </div>
+    
+        <div class="todo-field">
+            <label for="todo-duedate-edit">To-Do duedate</label>
+            <input type="date" id="todo-duedate-edit">
+        </div>
+    
+        <div class="todo-field">
+            <label for="todo-priority-edit">To-Do priority</label>
+            <select name="todo-priority" id="todo-priority-edit">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+        </div>
+
+        <button type="button" id="change-todo">Edit ToDo</button>
+    </div>
+
+    <div id="create-project-wrapper" class="closed">
+        <span id="close-project-modal" class="close-button close-button-modal">X</span>
+        <h3 class="title">New project name</h3>
+        <div>
+            <input type="text" id="project-name">
+            <button type="button" id="submit-project">Create</button>
+        </div>
+    </div>
 
     <div id="menu-wrapper">
         <div id="projects-wrapper">
             <h3 class="title">Projects</h3>
             <div id="projects"></div>
         </div>
+        <button type="button" id="create-project">Create Project</button>
     </div>
 
     <div id="todos-wrapper"></div>
+
+    <button type="button" id="create-todo">Create To-Do</button>
 
     <script src="main.js"></script>
 </body>

@@ -1,37 +1,43 @@
-function renderProjects(projectList) {
+import { returnProjectList } from './utilFunctions';
+import changeActiveProject from './changeActiveProject';
+import renderDefaultScreen from './defaultScreen';
+
+function renderProjects(projectObjectList) {
     const projectDiv = document.querySelector("#projects");
     projectDiv.innerHTML = "";
 
+    const projectList = returnProjectList(projectObjectList);
+
     projectList.forEach((project, index) => {
         const newDiv = document.createElement('div');
+        newDiv.id = index;
         const deleteProject = document.createElement('span');
 
         deleteProject.innerText = "X";
         deleteProject.classList.add('delete-project-button');
         deleteProject.classList.add('close-button');
-        deleteProject.id = index;
 
-        
+        deleteProject.addEventListener('click', e => {
+            e.stopPropagation();
+            if(projectObjectList[index].active === true) {
+                projectObjectList[index].active = false;
+                renderDefaultScreen();
+            }
+            projectObjectList.splice(index, 1);
+            renderProjects(projectObjectList);
+        });
+
         newDiv.classList.add('project-div');
-        newDiv.innerText = project;
+
+        const projectName = document.createElement('span');
+        projectName.innerText = project;
         
+        newDiv.appendChild(projectName);
         newDiv.appendChild(deleteProject);
         projectDiv.appendChild(newDiv);
     });
-    setupDeleteProjectEvent(projectList);
-}
-
-function setupDeleteProjectEvent(projectList) {
-    const deleteButtons = [...document.querySelectorAll('.delete-project-button')];
     
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const id = e.target.id;
-            console.log(id);
-            projectList.splice(id, 1);
-            renderProjects(projectList);
-        });
-    });
+    changeActiveProject(projectObjectList);
 }
 
 export default renderProjects;

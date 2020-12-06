@@ -1,3 +1,5 @@
+import { toggleModal } from './utilFunctions';
+
 function createTodo(title, description, duedate, priority) {
     const finished = false;
     const project = "default";
@@ -12,30 +14,11 @@ function createTodo(title, description, duedate, priority) {
     };
 }
 
-function toggleModal() {
-    const modal = document.querySelector("#create-todo-wrapper");
-    const modalBackground = document.querySelector("#modal-background");
-
-    if (modal.style.display == "") {
-        modal.style.display = "flex";
-        modalBackground.style.display = "block";
-    } else {
-        modal.style.display = "";
-        modalBackground.style.display = "";
-    }
-}
-
 function setupTodoModal() {
+    const modal = document.querySelector("#create-todo-wrapper");
     const createTodoButton = document.querySelector("#create-todo");
-    const closeModalButton = document.querySelector("#close-modal");
 
-    createTodoButton.addEventListener('click', () => {
-        toggleModal();
-    });
-
-    closeModalButton.addEventListener('click', () => {
-        toggleModal();
-    });
+    createTodoButton.addEventListener('click', () => toggleModal(modal));
 }
 
 export { createTodo, setupTodoModal };

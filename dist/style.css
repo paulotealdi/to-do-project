@@ -20,11 +20,11 @@ body {
 
 .title {
     color: rgb(56, 111, 231);
-    margin-bottom: 15px;
 }
 
 .close-button {
     color: rgb(209, 68, 68);
+    background-color: white;
 
     width: 30px;
     height: 30px;
@@ -49,6 +49,7 @@ body {
 
 /* MAIN MENU */
 #menu-wrapper {
+    position: relative;
     padding: 32px;
     flex: 1;
     border-right: 1px solid rgb(226, 226, 226);
@@ -57,7 +58,9 @@ body {
 #projects {
     display: flex;
     flex-direction: column;
-    height: 40vh;
+    height: 80vh;
+
+    margin-top: 15px;
 
     overflow-y: auto;
 }
@@ -70,14 +73,25 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
 
-.project-div {
     border: 1px solid rgb(180, 180, 180);
     border-radius: 5px;
+
     padding: 5px;
     margin: 5px 0;
-    min-height: 35px;
+    min-height: 45px;
+
+    cursor: pointer;
+    transition: background-color 200ms;
+}
+
+.project-div span {
+    overflow-wrap: break-word;
+    max-width: 80%;
+}
+
+.project-div:hover {
+    background-color: rgb(228, 228, 243);
 }
 
 .project-div .selected {
@@ -86,32 +100,12 @@ body {
 }
 
 /* CREATE TODO MODAL */
-#create-todo-wrapper {
-    height: 50vh;
-    flex-direction: column;
-    justify-content: space-between;
-    display: none;
-
-    z-index: 9999;
-
-    position: absolute;
-    right: 50%;
-    bottom: 50%;
-    transform: translate(50%, 50%);
-    border: 1px solid rgb(194, 194, 194);
-    background-color: white;
-    box-shadow: 0 6px 6px rgba(0,0,0,0.05);
-
-    padding: 25px;
-    border-radius: 15px;
-}
-
 #modal-background {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
-    display: none;
+    z-index: 9000;
 }
 
 #close-modal {
@@ -124,9 +118,6 @@ body {
 #todos-wrapper {
     flex: 7;
     padding: 20px;
-
-    display: flex;
-    flex-direction: column;
 
     overflow-y: auto;
 }
@@ -147,6 +138,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    transition: background-color 50ms;
+
+    cursor: pointer;
+}
+
+.todo-div:hover {
+    background-color: rgb(243, 243, 243);
 }
 
 .todo-div * {
@@ -162,10 +161,130 @@ body {
     flex: 3;
 }
 
+.todo-description-div p {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .todo-title-div {
     flex: 1;
 }
 
+.todo-title-div h3 {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .todo-duedate-div {
     flex: 1;
+    text-align: right;
+}
+
+#create-todo {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+}
+
+#todos-menu-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+#default-screen-text {
+    text-align: center;
+    margin-top: 30px;
+    color: rgb(56, 111, 231);
+    font-size: 30px;
+}
+
+#create-project {
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+}
+
+#create-project-wrapper {
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translateX(50%);
+    display: flex;
+    z-index: 9999;
+
+    border: 1px solid rgb(194, 194, 194);
+    background-color: white;
+    box-shadow: 0 6px 6px rgba(0,0,0,0.05);
+
+    padding: 25px;
+    border-radius: 15px;
+    height: 15vh;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#close-project-modal {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#empty-text {
+    color: rgb(56, 111, 231);
+    text-align: center;
+    margin-top: 80px;
+    font-size: 40px;
+}
+
+.priority-div {
+    min-height: 40px;
+}
+
+.finished-todo {
+    background-color: rgb(226, 226, 226);
+}
+
+.todo-checkbox {
+    margin-right: 10px;
+}
+
+.todo-modal {
+    height: 50vh;
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+
+    z-index: 9999;
+
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%, 50%);
+    border: 1px solid rgb(194, 194, 194);
+    background-color: white;
+    box-shadow: 0 6px 6px rgba(0,0,0,0.05);
+
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.closed {
+    display: none !important;
+}
+
+#close-edit-modal {
+    position: absolute;
+    right: 20px;
+    top: 20px;
 }
